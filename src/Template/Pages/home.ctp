@@ -2,12 +2,12 @@
           <section class='col-xs-12 col-sm-6 col-md-6'>
             <section>
               <h2>How to use this example application</h2>
-                <p>For instructions on how to use this application with OpenShift, start by reading the <a href="http://docs.okd.io/latest/dev_guide/templates.html#using-the-quickstart-templates">Developer Guide</a>.</p>
+                <p>For instructions on how to use this application with UTCCP, start by reading the <a href="http://docs.okd.io/latest/dev_guide/templates.html#using-the-quickstart-templates">Developer Guide</a>.</p>
 
               <h2>Deploying code changes</h2>
                 <p>
-                  The source code for this application is available to be forked from the <a href="https://www.github.com/sclorg/cakephp-ex">OpenShift GitHub repository</a>.
-                  You can configure a webhook in your repository to make OpenShift automatically start a build whenever you push your code:
+                  The source code for this application is available to be forked from the <a href="https://www.github.com/utccp/cakephp-ex">UTCCP GitHub repository</a>.
+                  You can configure a webhook in your repository to make UTCCP automatically start a build whenever you push your code:
                 </p>
 
 <ol>
@@ -17,19 +17,19 @@
   <li>Click the Configuration tab</li>
   <li>Click the "Copy to clipboard" icon to the right of the "GitHub webhook URL" field</li>
   <li>Navigate to your repository on GitHub and click on repository settings &gt; webhooks &gt; Add webhook</li>
-  <li>Paste your webhook URL provided by OpenShift</li>
+  <li>Paste your webhook URL provided by UTCCP</li>
   <li>Leave the defaults for the remaining fields &mdash; that's it!</li>
 </ol>
-<p>After you save your webhook, if you refresh your settings page you can see the status of the ping that Github sent to OpenShift to verify it can reach the server.</p>
-<p>Note: adding a webhook requires your OpenShift server to be reachable from GitHub.</p>
+<p>After you save your webhook, if you refresh your settings page you can see the status of the ping that Github sent to UTCCP to verify it can reach the server.</p>
+<p>Note: adding a webhook requires your UTCCP server to be reachable from GitHub.</p>
 
                 <h3>Working in your local Git repository</h3>
-                <p>If you forked the application from the OpenShift GitHub example, you'll need to manually clone the repository to your local system. Copy the application's source code Git URL and then run:</p>
+                <p>If you forked the application from the UTCCP GitHub example, you'll need to manually clone the repository to your local system. Copy the application's source code Git URL and then run:</p>
 
 <pre>$ git clone &lt;git_url&gt; &lt;directory_to_create&gt;
 
 # Within your project directory
-# Commit your changes and push to OpenShift
+# Commit your changes and push to UTCCP
 
 $ git commit -a -m 'Some commit message'
 $ git push</pre>
@@ -80,15 +80,14 @@ oc deploy cakephp-mysql-example --latest
                 <p>You can use the Web Console to view the state of your application components and launch new builds.</p>
 
                 <h3>Command Line</h3>
-                <p>With the <a href="http://docs.okd.io/latest/cli_reference/overview.html">OpenShift command line interface</a> (CLI), you can create applications and manage projects from a terminal.</p>
+                <p>With the <a href="http://docs.okd.io/latest/cli_reference/overview.html">UTCCP command line interface</a> (CLI), you can create applications and manage projects from a terminal.</p>
 
                 <h2>Development Resources</h2>
                   <ul>
-                    <li><a href="http://docs.okd.io/latest/welcome/index.html">OpenShift Documentation</a></li>
-                    <li><a href="https://github.com/openshift/origin">Openshift Origin GitHub</a></li>
-                    <li><a href="https://github.com/openshift/source-to-image">Source To Image GitHub</a></li>
-                    <li><a href="http://docs.okd.io/latest/using_images/s2i_images/php.html">Getting Started with PHP on OpenShift</a></li>
-                    <li><a href="http://stackoverflow.com/questions/tagged/openshift">Stack Overflow questions for OpenShift</a></li>
+                    <li><a href="http://docs.okd.io/latest/welcome/index.html">UTCCP Documentation</a></li>
+                    <li><a href="https://github.com/utccp/origin">UTCCP Origin GitHub</a></li>
+                    <li><a href="https://github.com/utccp/source-to-image">Source To Image GitHub</a></li>
+                    <li><a href="http://docs.okd.io/latest/using_images/s2i_images/php.html">Getting Started with PHP on UTCCP</a></li>
                     <li><a href="http://git-scm.com/documentation">Git documentation</a></li>
                   </ul>
 

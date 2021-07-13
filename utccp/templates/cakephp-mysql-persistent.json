@@ -2,23 +2,22 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "cakephp-mysql-example",
+    "name": "cakephp-mysql-persistent",
     "annotations": {
-      "openshift.io/display-name": "CakePHP + MySQL (Ephemeral)",
-      "description": "An example CakePHP application with a MySQL database. For more information about using this template, including OpenShift considerations, see https://github.com/sclorg/cakephp-ex/blob/master/README.md.\n\nWARNING: Any data stored will be lost upon pod destruction. Only use this template for testing.",
+      "openshift.io/display-name": "CakePHP + MySQL",
+      "description": "An example CakePHP application with a MySQL database. For more information about using this template, including UTCCP considerations, see https://github.com/utccp/cakephp-ex/blob/master/README.md.",
       "tags": "quickstart,php,cakephp",
       "iconClass": "icon-php",
-      "openshift.io/long-description": "This template defines resources needed to develop a CakePHP application, including a build configuration, application deployment configuration, and database deployment configuration.  The database is stored in non-persistent storage, so this configuration should be used for experimental purposes only.",
-      "openshift.io/provider-display-name": "Red Hat, Inc.",
-      "openshift.io/documentation-url": "https://github.com/sclorg/cakephp-ex",
-      "openshift.io/support-url": "https://access.redhat.com",
+      "openshift.io/long-description": "This template defines resources needed to develop a CakePHP application, including a build configuration, application deployment configuration, and database deployment configuration.",
+      "openshift.io/provider-display-name": "UnionTech, Inc.",
+      "openshift.io/documentation-url": "https://github.com/utccp/cakephp-ex",
       "template.openshift.io/bindable": "false"
     }
   },
-  "message": "The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/sclorg/cakephp-ex/blob/master/README.md.",
+  "message": "The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.\n\nFor more information about using this template, including UTCCP considerations, see https://github.com/utccp/cakephp-ex/blob/master/README.md.",
   "labels": {
-      "template": "cakephp-mysql-example",
-      "app": "cakephp-mysql-example"
+      "template": "cakephp-mysql-persistent",
+      "app": "cakephp-mysql-persistent"
   },
   "objects": [
     {
@@ -161,7 +160,7 @@
                 "command": [
                   "./migrate-database.sh"
                 ],
-                "containerName": "cakephp-mysql-example"
+                "containerName": "cakephp-mysql-persistent"
               }
             }
           }
@@ -172,7 +171,7 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "cakephp-mysql-example"
+                "cakephp-mysql-persistent"
               ],
               "from": {
                 "kind": "ImageStreamTag",
@@ -198,7 +197,7 @@
           "spec": {
             "containers": [
               {
-                "name": "cakephp-mysql-example",
+                "name": "cakephp-mysql-persistent",
                 "image": " ",
                 "ports": [
                   {
@@ -289,6 +288,23 @@
       }
     },
     {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${DATABASE_SERVICE_NAME}"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "resources": {
+          "requests": {
+            "storage": "${VOLUME_CAPACITY}"
+          }
+        }
+      }
+    },
+    {
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
@@ -357,8 +373,10 @@
           "spec": {
             "volumes": [
               {
-                "name": "data",
-                "emptyDir": {}
+                "name": "${DATABASE_SERVICE_NAME}-data",
+                "persistentVolumeClaim": {
+                  "claimName": "${DATABASE_SERVICE_NAME}"
+                }
               }
             ],
             "containers": [
@@ -372,7 +390,7 @@
                 ],
                 "volumeMounts": [
                   {
-                    "name": "data",
+                    "name": "${DATABASE_SERVICE_NAME}-data",
                     "mountPath": "/var/lib/mysql/data"
                   }
                 ],
@@ -436,7 +454,7 @@
       "displayName": "Name",
       "description": "The name assigned to all of the frontend objects defined in this template.",
       "required": true,
-      "value": "cakephp-mysql-example"
+      "value": "cakephp-mysql-persistent"
     },
     {
       "name": "NAMESPACE",
@@ -448,16 +466,16 @@
     {
       "name": "PHP_VERSION",
       "displayName": "PHP Version",
-      "description": "Version of PHP image to be used (7.3-ubi7, 7.3-ubi8, or latest).",
+      "description": "Version of PHP image to be used (7.3 or latest).",
       "required": true,
-      "value": "7.3-ubi8"
+      "value": "7.3"
     },
     {
       "name": "MYSQL_VERSION",
       "displayName": "MySQL Version",
-      "description": "Version of MySQL image to be used (8.0-el8 or latest).",
+      "description": "Version of MySQL image to be used (8.0 or latest).",
       "required": true,
-      "value": "8.0-el8"
+      "value": "8.0"
     },
     {
       "name": "MEMORY_LIMIT",
@@ -474,11 +492,18 @@
       "value": "512Mi"
     },
     {
+      "name": "VOLUME_CAPACITY",
+      "displayName": "Volume Capacity",
+      "description": "Volume space available for data, e.g. 512Mi, 2Gi",
+      "value": "1Gi",
+      "required": true
+    },
+    {
       "name": "SOURCE_REPOSITORY_URL",
       "displayName": "Git Repository URL",
       "description": "The URL of the repository with your application source code.",
       "required": true,
-      "value": "https://github.com/sclorg/cakephp-ex.git"
+      "value": "https://github.com/utccp/cakephp-ex.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
@@ -561,10 +586,10 @@
       "value": ""
     },
     {
-       "name": "MYSQL_DEFAULT_AUTHENTICATION_PLUGIN",
-       "displayName": "MySQL authentication plugin",
-       "description": "The custom MySQL default authentication plugin (default: mysql_native_password), might be changed to caching_sha2_password once PHP client supports it.",
-       "value": "mysql_native_password"
+      "name": "MYSQL_DEFAULT_AUTHENTICATION_PLUGIN",
+      "displayName": "MySQL authentication plugin",
+      "description": "The custom MySQL default authentication plugin (default: mysql_native_password), might be changed to caching_sha2_password once PHP client supports it.",
+      "value": "mysql_native_password"
     }
   ]
 }

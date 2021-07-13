@@ -15,7 +15,7 @@ function create_salt() {
 	$original = getenv("CAKEPHP_SECURITY_SALT");
 
 	// Attempts to get secret token from CAKEPHP_SECRET_TOKEN,
-	// generated in openshift template in openshift/templates.
+	// generated in utccp template in utccp/templates.
 	// For development purposes a default secret token is used.
 	if ( getenv('CAKEPHP_SECRET_TOKEN') != '' ) {
 		$token = getenv('CAKEPHP_SECRET_TOKEN');

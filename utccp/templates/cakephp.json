@@ -5,17 +5,16 @@
     "name": "cakephp-example",
     "annotations": {
       "openshift.io/display-name": "CakePHP",
-      "description": "An example CakePHP application with no database. For more information about using this template, including OpenShift considerations, see https://github.com/sclorg/cakephp-ex/blob/master/README.md.",
+      "description": "An example CakePHP application with no database. For more information about using this template, including UTCCP considerations, see https://github.com/utccp/cakephp-ex/blob/master/README.md.",
       "tags": "quickstart,php,cakephp",
       "iconClass": "icon-php",
       "openshift.io/long-description": "This template defines resources needed to develop a CakePHP application, including a build configuration and application deployment configuration.  It does not include a database.",
-      "openshift.io/provider-display-name": "Red Hat, Inc.",
-      "openshift.io/documentation-url": "https://github.com/sclorg/cakephp-ex",
-      "openshift.io/support-url": "https://access.redhat.com",
+      "openshift.io/provider-display-name": "UnionTech, Inc.",
+      "openshift.io/documentation-url": "https://github.com/utccp/cakephp-ex",
       "template.openshift.io/bindable": "false"
     }
   },
-  "message": "The following service(s) have been created in your project: ${NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/sclorg/cakephp-ex/blob/master/README.md.",
+  "message": "The following service(s) have been created in your project: ${NAME}.\n\nFor more information about using this template, including UTCCP considerations, see https://github.com/utccp/cakephp-ex/blob/master/README.md.",
   "labels": {
       "template": "cakephp-example",
       "app": "cakephp-example"
@@ -263,9 +262,9 @@
     {
       "name": "PHP_VERSION",
       "displayName": "PHP Version",
-      "description": "Version of PHP image to be used (7.3-ubi7, 7.3-ubi8, or latest).",
+      "description": "Version of PHP image to be used (7.3 or latest).",
       "required": true,
-      "value": "7.3-ubi8"
+      "value": "7.3"
     },
     {
       "name": "MEMORY_LIMIT",
@@ -279,7 +278,7 @@
       "displayName": "Git Repository URL",
       "description": "The URL of the repository with your application source code.",
       "required": true,
-      "value": "https://github.com/sclorg/cakephp-ex.git"
+      "value": "https://github.com/utccp/cakephp-ex.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
