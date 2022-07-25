@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Welcome to UTCCP</title>
+  <title>Welcome to UCCPS</title>
 
 
 <style>
@@ -210,7 +210,7 @@ pre {
 <section class='container'>
 
         <hgroup>
-           <h1>Welcome to your CakePHP application on UTCCP</h1>
+           <h1>Welcome to your CakePHP application on UCCPS</h1>
         </hgroup>
 
         <?= $this->fetch('content') ?>

@@ -2,8 +2,8 @@
 
 <!-- toc -->
 
-- [CakePHP Sample App on UTCCP](#cakephp-sample-app-on-openshift)
-  * [UTCCP Considerations](#openshift-considerations)
+- [CakePHP Sample App on UCCPS](#cakephp-sample-app-on-openshift)
+  * [UCCPS Considerations](#openshift-considerations)
     + [Security](#security)
     + [Installation:](#installation)
     + [Debugging Unexpected Failures](#debugging-unexpected-failures)
@@ -17,24 +17,24 @@
 
 <!-- tocstop -->
 
-CakePHP Sample App on UTCCP
+CakePHP Sample App on UCCPS
 ===============================
 
-This is a quickstart CakePHP application for UTCCP v1 that you can use as a starting point to develop your own application and deploy it on an [UTCCP](https://github.com/utccp/origin) cluster.
+This is a quickstart CakePHP application for UCCPS v1 that you can use as a starting point to develop your own application and deploy it on an [UCCPS](https://github.com/utccp/origin) cluster.
 
 If you'd like to install it, follow [these directions](https://github.com/utccp/cakephp-ex/blob/master/README.md#installation).  
 
-The steps in this document assume that you have access to an UTCCP deployment that you can deploy applications on.
+The steps in this document assume that you have access to an UCCPS deployment that you can deploy applications on.
 
-UTCCP Considerations
+UCCPS Considerations
 ------------------------
-These are some special considerations you may need to keep in mind when running your application on UTCCP.
+These are some special considerations you may need to keep in mind when running your application on UCCPS.
 
 ### Security
-Since the quickstarts are shared code, we had to take special consideration to ensure that security related configuration variable values are unique across applications. To accomplish this, we modified some of the configuration files. Namely we changed Security.salt and Security.cipherSeed values in the app/Config/core.php config file. Those values are now generated from the application template as CAKEPHP_SECURITY_SALT and CAKEPHP_SECURITY_CIPHER_SEED. Also the secret token is generated in the template as CAKEPHP_SECRET_TOKEN. From these values the session hashes are generated. Now instead of using the same default values, UTCCP can generate these values using the generate from logic defined within the instant application's template.
+Since the quickstarts are shared code, we had to take special consideration to ensure that security related configuration variable values are unique across applications. To accomplish this, we modified some of the configuration files. Namely we changed Security.salt and Security.cipherSeed values in the app/Config/core.php config file. Those values are now generated from the application template as CAKEPHP_SECURITY_SALT and CAKEPHP_SECURITY_CIPHER_SEED. Also the secret token is generated in the template as CAKEPHP_SECRET_TOKEN. From these values the session hashes are generated. Now instead of using the same default values, UCCPS can generate these values using the generate from logic defined within the instant application's template.
 
 ### Installation:
-These steps assume your UTCCP deployment has the default set of ImageStreams defined.  Instructions for installing the default ImageStreams are available [here](https://docs.okd.io/latest/install_config/imagestreams_templates.html#creating-image-streams-for-openshift-images).  If you are defining the set of ImageStreams now, remember to pass in the proper cluster-admin credentials and to create the ImageStreams in the 'openshift' namespace.
+These steps assume your UCCPS deployment has the default set of ImageStreams defined.  Instructions for installing the default ImageStreams are available [here](https://docs.okd.io/latest/install_config/imagestreams_templates.html#creating-image-streams-for-openshift-images).  If you are defining the set of ImageStreams now, remember to pass in the proper cluster-admin credentials and to create the ImageStreams in the 'openshift' namespace.
 
 1. Fork a copy of [cakephp-ex](https://github.com/sclorg/cakephp-ex)
 2. Clone your repository to your development machine and cd to the repository directory
@@ -87,7 +87,7 @@ Review some of the common tips and suggestions [here](https://github.com/utccp/o
 
 
 ### Adding Webhooks and Making Code Changes
-Since UTCCP V1 does not provide a git repository out of the box, you can configure your github repository to make a webhook call whenever you push your code.
+Since UCCPS V1 does not provide a git repository out of the box, you can configure your github repository to make a webhook call whenever you push your code.
 
 1. From the Web Console homepage, navigate to your project
 2. Click on Browse > Builds
@@ -95,9 +95,9 @@ Since UTCCP V1 does not provide a git repository out of the box, you can configu
 4. Click the Configuration tab
 5. Click the "Copy to clipboard" icon to the right of the "GitHub webhook URL" field
 6. Navigate to your repository on GitHub and click on repository settings > webhooks > Add webhook
-7. Paste your webhook URL provided by UTCCP
+7. Paste your webhook URL provided by UCCPS
 8. Leave the defaults for the remaining fields - That's it!
-9. After you save your webhook, if you refresh your settings page you can see the status of the ping that Github sent to UTCCP to verify it can reach the server.  
+9. After you save your webhook, if you refresh your settings page you can see the status of the ping that Github sent to UCCPS to verify it can reach the server.  
 
 ### Enabling the Database example
 In order to access the example CakePHP home page, which contains application stats including database connectivity, you have to go into the app/View/Layouts/ directory, remove the default.ctp and after that rename default.ctp.default into default.ctp`.
