@@ -20,9 +20,9 @@
 CakePHP Sample App on UCCPS
 ===============================
 
-This is a quickstart CakePHP application for UCCPS v1 that you can use as a starting point to develop your own application and deploy it on an [UCCPS](https://github.com/utccp/origin) cluster.
+This is a quickstart CakePHP application for UCCPS v1 that you can use as a starting point to develop your own application and deploy it on an UCCPS cluster.
 
-If you'd like to install it, follow [these directions](https://github.com/utccp/cakephp-ex/blob/master/README.md#installation).  
+If you'd like to install it, follow [these directions](https://github.com/uccps-samples/cakephp-ex/blob/master/README.md#installation).  
 
 The steps in this document assume that you have access to an UCCPS deployment that you can deploy applications on.
 
@@ -34,13 +34,13 @@ These are some special considerations you may need to keep in mind when running 
 Since the quickstarts are shared code, we had to take special consideration to ensure that security related configuration variable values are unique across applications. To accomplish this, we modified some of the configuration files. Namely we changed Security.salt and Security.cipherSeed values in the app/Config/core.php config file. Those values are now generated from the application template as CAKEPHP_SECURITY_SALT and CAKEPHP_SECURITY_CIPHER_SEED. Also the secret token is generated in the template as CAKEPHP_SECRET_TOKEN. From these values the session hashes are generated. Now instead of using the same default values, UCCPS can generate these values using the generate from logic defined within the instant application's template.
 
 ### Installation:
-These steps assume your UCCPS deployment has the default set of ImageStreams defined.  Instructions for installing the default ImageStreams are available [here](https://docs.okd.io/latest/install_config/imagestreams_templates.html#creating-image-streams-for-openshift-images).  If you are defining the set of ImageStreams now, remember to pass in the proper cluster-admin credentials and to create the ImageStreams in the 'openshift' namespace.
+These steps assume your UCCPS deployment has the default set of ImageStreams defined.  If you are defining the set of ImageStreams now, remember to pass in the proper cluster-admin credentials and to create the ImageStreams in the 'openshift' namespace.
 
-1. Fork a copy of [cakephp-ex](https://github.com/sclorg/cakephp-ex)
+1. Fork a copy of [cakephp-ex](https://github.com/uccps-samples/cakephp-ex)
 2. Clone your repository to your development machine and cd to the repository directory
 3. Add a PHP application from the provided template and specify the source url to be your forked repo  
 
-		$ oc new-app openshift/templates/cakephp.json -p SOURCE_REPOSITORY_URL=<your repository location>
+		$ oc new-app uccps/templates/cakephp.json -p SOURCE_REPOSITORY_URL=<your repository location>
 
 4. Depending on the state of your system, and whether additional items need to be downloaded, it may take around a minute for your build to be started automatically.  If you do not want to wait, run
 
@@ -74,16 +74,12 @@ These steps assume your UCCPS deployment has the default set of ImageStreams def
 In this case, the IP for cakephp-example is 172.30.97.123 and it is on port 8080.  
 *Note*: you can also get this information from the web console.
 
-### Debugging Unexpected Failures
-
-Review some of the common tips and suggestions [here](https://github.com/utccp/origin/blob/master/docs/debugging-openshift.md).
-
 ### Installation: With MySQL
 1. Follow the steps for the Manual Installation above for all but step 3, instead use step 2 below.  
   - Note: The output in steps 5-6 may also display information about your database.
 2. Add a PHP application from the cakephp-mysql template and specify the source url to be your forked repo  
 
-		$ oc new-app utccp/templates/cakephp-mysql.json -p SOURCE_REPOSITORY_URL=<your repository location>
+		$ oc new-app uccps/templates/cakephp-mysql-example.json -p SOURCE_REPOSITORY_URL=<your repository location>
 
 
 ### Adding Webhooks and Making Code Changes
@@ -108,17 +104,17 @@ You will then need to rebuild the application.  This is done via either a `oc st
 
 ### Hot Deploy
 
-In order to immediately pick up changes made in your application source code, you need to run your built image with the `OPCACHE_REVALIDATE_FREQ=0` parameter to the [oc new-app](https://docs.okd.io/latest/cli_reference/basic_cli_operations.html#basic-cli-operations) command, while performing the [installation steps](https://github.com/sclorg/cakephp-ex#installation) described in this README.
+In order to immediately pick up changes made in your application source code, you need to run your built image with the `OPCACHE_REVALIDATE_FREQ=0` parameter to the oc new-app command, while performing the [installation steps](https://github.com/uccps-samples/cakephp-ex#installation) described in this README.
 
-	$ oc new-app utccp/templates/cakephp-mysql.json -p OPCACHE_REVALIDATE_FREQ=0
+	$ oc new-app utccp/templates/cakephp-mysql-example.json -p OPCACHE_REVALIDATE_FREQ=0
 
 Hot deploy works out of the box in the php image used with this example.
 
-To change your source code in the running container you need to [oc rsh](https://docs.okd.io/latest/cli_reference/basic_cli_operations.html#troubleshooting-and-debugging-cli-operations) into it.
+To change your source code in the running container you need to oc rsh into it.
 
 	$ oc rsh <POD_ID>
 
-After you [oc rsh](https://docs.okd.io/latest/cli_reference/basic_cli_operations.html#troubleshooting-and-debugging-cli-operations) into the running container, your current directory is set to `/opt/app-root/src`, where the source code is located.
+After you oc rsh into the running container, your current directory is set to `/opt/app-root/src`, where the source code is located.
 
 ### Source repository layout
 
